@@ -165,10 +165,10 @@
                         placeholder="Search projects..." />
                 </label>
                 <div class="flex gap-3">
-                    <button
+                    <a href="{% url 'dashboard:settings' %}"
                         class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors">
                         <span class="material-symbols-outlined">settings</span>
-                    </button>
+                    </a>
                     <button
                         class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors relative">
                         <span class="material-symbols-outlined">notifications</span>
@@ -188,24 +188,24 @@
                     <h3 class="text-xs font-bold uppercase tracking-widest text-outline mb-4">Main Menu</h3>
                     <div class="flex flex-col gap-1">
                         <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface hover:bg-surface-container-high transition-all"
-                            href="#">
+                            href="{% url 'dashboard:dashboard' %}">
                             <span class="material-symbols-outlined"
                                 style="font-variation-settings: 'FILL' 1;">dashboard</span>
                             <span class="text-sm font-medium">Dashboard</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-container text-white shadow-sm"
-                            href="#">
+                            href="{% url 'generator:generator' %}">
                             <span class="material-symbols-outlined"
                                 style="font-variation-settings: 'FILL' 1;">edit_document</span>
                             <span class="text-sm font-medium">Generator</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface hover:bg-surface-container-high transition-all"
-                            href="#">
+                            href="{% url 'blogs:list' %}">
                             <span class="material-symbols-outlined">library_books</span>
                             <span class="text-sm font-medium">My Blogs</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface hover:bg-surface-container-high transition-all"
-                            href="#">
+                            href="{% url 'blogs:history' %}">
                             <span class="material-symbols-outlined">analytics</span>
                             <span class="text-sm font-medium">Analytics</span>
                         </a>
@@ -419,7 +419,8 @@
                 <section class="flex-1 flex flex-col bg-surface-container relative overflow-hidden">
                     <!-- Subtle background decoration -->
                     <div class="absolute top-0 right-0 w-full h-full pointer-events-none opacity-50">
-                        <webgl-shader class="w-full h-full" src="{{DATA:ANIMATION:ANIMATION_1}}"></webgl-shader>
+                        <webgl-shader class="w-full h-full"
+                            src="{% verbatim %}{{DATA:ANIMATION:ANIMATION_1}}{% endverbatim %}"></webgl-shader>
                     </div>
                     <!-- Metadata Bar -->
                     <div

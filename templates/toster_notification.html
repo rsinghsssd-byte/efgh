@@ -141,7 +141,8 @@
     <!-- Top Navigation Shell -->
     <header
         class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-container-max mx-auto bg-surface/60 backdrop-blur-md">
-        <div class="font-display text-headline-md font-bold text-primary tracking-tight">Luminous AI</div>
+        <a href="{% url 'dashboard:dashboard' %}"
+            class="font-display text-headline-md font-bold text-primary tracking-tight">Luminous AI</a>
         <nav class="hidden md:flex gap-lg items-center">
             <a class="font-label-md text-label-md text-primary font-semibold border-b-2 border-primary"
                 href="#">Product</a>
@@ -153,9 +154,9 @@
         <div class="flex items-center gap-sm">
             <button
                 class="font-label-md text-label-md text-on-surface-variant hover:opacity-70 transition-opacity">Support</button>
-            <button
-                class="accent-gradient text-white px-md py-xs rounded-lg font-label-md text-label-md shadow-lg hover:scale-105 active:scale-95 transition-transform">Sign
-                Up</button>
+            <a href="{% url 'accounts:signup' %}"
+                class="accent-gradient text-white px-md py-xs rounded-lg font-label-md text-label-md shadow-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center">Sign
+                Up</a>
         </div>
     </header>
     <main class="pt-[120px] px-sm md:px-lg max-w-container-max mx-auto">

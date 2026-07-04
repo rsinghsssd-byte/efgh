@@ -137,17 +137,18 @@
                         <div class="flex flex-1 justify-end gap-4 md:gap-8">
                             <div class="hidden lg:flex items-center gap-9">
                                 <a class="text-on-surface-variant text-sm font-medium leading-normal hover:text-primary transition-colors"
-                                    href="#">Dashboard</a>
-                                <a class="text-primary text-sm font-bold leading-normal" href="#">My Blogs</a>
+                                    href="{% url 'dashboard:dashboard' %}">Dashboard</a>
+                                <a class="text-primary text-sm font-bold leading-normal"
+                                    href="{% url 'blogs:list' %}">My Blogs</a>
                                 <a class="text-on-surface-variant text-sm font-medium leading-normal hover:text-primary transition-colors"
-                                    href="#">Templates</a>
+                                    href="{% url 'generator:generator' %}">Templates</a>
                                 <a class="text-on-surface-variant text-sm font-medium leading-normal hover:text-primary transition-colors"
-                                    href="#">Settings</a>
+                                    href="{% url 'dashboard:settings' %}">Settings</a>
                             </div>
-                            <button
+                            <a href="{% url 'generator:generator' %}"
                                 class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-on-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-container transition-all">
                                 <span class="truncate">Create New Blog</span>
-                            </button>
+                            </a>
                             <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-outline-variant"
                                 data-alt="A professional user profile portrait in a minimalist studio setting with soft indigo backlighting, representing a tech-savvy content creator."
                                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzHCCXyVFFcLH9tokqcrHLyoCEVJ_JLqyQeanXbSvvuoCbGLmbfyCLswlpNLlA1a1i8xG1tgYoPD9i-E2nNvTw9dOMpbtm3v_RUYlS5vCRPCdKF_QFTTAemsZkiGrtksb7vfvkRJz0y5FacqvXoD43PF-y0uTIFObjxVuntKKuTLOBdUE2EoZKgdDE9-GR8mCvOSMmcMXMGlhwVBgPl-vHpMtK-akueTcbWheNPPnu6te9VYmKOO5Lbg");'>
@@ -445,7 +446,7 @@
                             </div>
                         </article>
                         <!-- New Blog Placeholder/Empty Card -->
-                        <button
+                        <a href="{% url 'generator:generator' %}"
                             class="flex flex-col items-center justify-center bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl p-8 hover:border-primary hover:bg-surface-container transition-all group min-h-[340px]">
                             <div
                                 class="size-16 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-4">
@@ -454,7 +455,7 @@
                             <p class="text-on-surface font-bold text-lg">Create New Blog</p>
                             <p class="text-on-surface-variant text-sm text-center mt-2 max-w-[200px]">Start generating
                                 your next viral article with AI assistance.</p>
-                        </button>
+                        </a>
                     </div>
                     <!-- Pagination/Load More -->
                     <div class="flex flex-col items-center justify-center py-12 gap-4">

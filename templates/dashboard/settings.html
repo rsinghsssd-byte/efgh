@@ -147,11 +147,11 @@
             <span class="font-display text-headline-md text-primary">Lumina AI</span>
             <nav class="hidden md:flex items-center gap-6">
                 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                    href="#">Dashboard</a>
+                    href="{% url 'dashboard:dashboard' %}">Dashboard</a>
                 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                    href="#">My Blogs</a>
+                    href="{% url 'blogs:list' %}">My Blogs</a>
                 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                    href="#">Templates</a>
+                    href="{% url 'generator:generator' %}">Templates</a>
                 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
                     href="#">Analytics</a>
             </nav>
@@ -191,12 +191,12 @@
         </div>
         <nav class="flex-1 px-4 space-y-1">
             <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all group"
-                href="#">
+                href="{% url 'generator:generator' %}">
                 <span class="material-symbols-outlined group-hover:text-primary">auto_awesome</span>
                 <span class="font-label-md">Generator</span>
             </a>
             <a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container px-4 py-3 rounded-lg transition-all group"
-                href="#">
+                href="{% url 'blogs:list' %}">
                 <span class="material-symbols-outlined group-hover:text-primary">book_2</span>
                 <span class="font-label-md">Library</span>
             </a>
@@ -211,7 +211,7 @@
                 <span class="font-label-md">SEO Audit</span>
             </a>
             <a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 transition-all"
-                href="#">
+                href="{% url 'dashboard:settings' %}">
                 <span class="material-symbols-outlined">settings</span>
                 <span class="font-label-md">Settings</span>
             </a>

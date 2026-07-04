@@ -176,8 +176,8 @@
             </div>
             <button
                 class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">notifications</button>
-            <button
-                class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">settings</button>
+            <a href="{% url 'dashboard:settings' %}"
+                class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">settings</a>
             <div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
                 <img class="w-full h-full object-cover"
                     data-alt="A professional studio portrait of a young tech entrepreneur with a clean, minimalist background. Soft, directional lighting highlights their friendly expression, capturing a modern professional aesthetic that fits a high-end AI platform. The color palette is composed of soft grays and crisp whites."
@@ -190,22 +190,22 @@
         class="fixed left-0 top-0 h-full flex flex-col p-md z-40 border-r border-outline-variant bg-surface-container-low w-64 pt-24">
         <div class="flex flex-col gap-xs flex-grow">
             <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
-                href="#">
+                href="{% url 'dashboard:dashboard' %}">
                 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
                 Dashboard
             </a>
             <a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-xl p-md font-label-md text-label-md shadow-sm"
-                href="#">
+                href="{% url 'generator:generator' %}">
                 <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
                 Generator
             </a>
             <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
-                href="#">
+                href="{% url 'blogs:list' %}">
                 <span class="material-symbols-outlined" data-icon="article">article</span>
                 My Blogs
             </a>
             <a class="flex items-center gap-md text-on-surface-variant p-md hover:bg-surface-variant rounded-xl transition-all font-label-md text-label-md"
-                href="#">
+                href="{% url 'blogs:history' %}">
                 <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
                 Analytics
             </a>

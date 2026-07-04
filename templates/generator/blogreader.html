@@ -160,12 +160,12 @@
     <!-- Top Navigation Bar -->
     <nav class="fixed top-0 w-full z-50 glass-nav shadow-[0px_1px_3px_rgba(0,0,0,0.05)]">
         <div class="max-w-container-max mx-auto px-md h-20 flex items-center justify-between">
-            <div class="flex items-center gap-xs">
+            <a href="{% url 'dashboard:dashboard' %}" class="flex items-center gap-xs">
                 <span class="font-display text-headline-md font-bold tracking-tight text-primary">Aetherium AI</span>
-            </div>
+            </a>
             <div class="hidden md:flex items-center gap-lg">
                 <a class="text-primary font-semibold border-b-2 border-primary pb-1 font-body-md text-body-md"
-                    href="#">Discover</a>
+                    href="{% url 'blogs:list' %}">Discover</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md"
                     href="#">Case Studies</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md"
@@ -173,10 +173,10 @@
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md"
                     href="#">Pricing</a>
             </div>
-            <button
+            <a href="{% url 'generator:generator' %}"
                 class="accent-gradient text-on-primary px-lg py-3 rounded-full font-label-md text-label-md hover:scale-[1.02] active:scale-[0.98] transition-transform shadow-lg">
                 Get Started
-            </button>
+            </a>
         </div>
     </nav>
     <!-- Floating Share Button -->

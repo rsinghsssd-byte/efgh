@@ -147,29 +147,29 @@
             </div>
             <nav class="flex-1 space-y-xs">
                 <a class="flex items-center gap-3 px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors group"
-                    href="#">
+                    href="{% url 'dashboard:dashboard' %}">
                     <span class="material-symbols-outlined">dashboard</span>
                     <span class="font-body-md text-body-md">Dashboard</span>
                 </a>
                 <a class="flex items-center gap-3 px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors group"
-                    href="#">
+                    href="{% url 'generator:generator' %}">
                     <span class="material-symbols-outlined">auto_awesome</span>
                     <span class="font-body-md text-body-md">Generator</span>
                 </a>
                 <a class="flex items-center gap-3 px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors group"
-                    href="#">
+                    href="{% url 'blogs:list' %}">
                     <span class="material-symbols-outlined">article</span>
                     <span class="font-body-md text-body-md">My Blogs</span>
                 </a>
                 <a class="flex items-center gap-3 px-sm py-xs rounded-lg text-primary dark:text-inverse-primary font-bold border-r-2 border-primary bg-surface-container-low transition-colors group"
-                    href="#">
+                    href="{% url 'blogs:history' %}">
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
                     <span class="font-body-md text-body-md">Analytics</span>
                 </a>
             </nav>
             <div class="pt-md mt-auto border-t border-outline-variant/30 space-y-xs">
                 <a class="flex items-center gap-3 px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors group"
-                    href="#">
+                    href="{% url 'dashboard:settings' %}">
                     <span class="material-symbols-outlined">settings</span>
                     <span class="font-body-md text-body-md">Settings</span>
                 </a>

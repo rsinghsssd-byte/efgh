@@ -137,11 +137,11 @@
             </div>
             <nav class="hidden md:flex gap-md items-center">
                 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary transition-colors duration-200"
-                    href="#">Dashboard</a>
+                    href="{% url 'dashboard:dashboard' %}">Dashboard</a>
                 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary transition-colors duration-200"
-                    href="#">Projects</a>
+                    href="{% url 'blogs:list' %}">Projects</a>
                 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary transition-colors duration-200"
-                    href="#">Templates</a>
+                    href="{% url 'generator:generator' %}">Templates</a>
                 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary transition-colors duration-200"
                     href="#">Billing</a>
             </nav>
@@ -175,27 +175,27 @@
         </div>
         <nav class="flex-1 space-y-1">
             <a class="flex items-center gap-sm p-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high rounded-lg font-medium transition-all"
-                href="#">
+                href="{% url 'dashboard:dashboard' %}">
                 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
                 <span class="font-label-md text-label-md">Overview</span>
             </a>
             <a class="flex items-center gap-sm p-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high rounded-lg font-medium transition-all"
-                href="#">
+                href="{% url 'generator:generator' %}">
                 <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
                 <span class="font-label-md text-label-md">Generations</span>
             </a>
             <a class="flex items-center gap-sm p-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high rounded-lg font-medium transition-all"
-                href="#">
+                href="{% url 'blogs:list' %}">
                 <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
                 <span class="font-label-md text-label-md">Assets</span>
             </a>
             <a class="flex items-center gap-sm p-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high rounded-lg font-medium transition-all"
-                href="#">
+                href="{% url 'blogs:history' %}">
                 <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
                 <span class="font-label-md text-label-md">Usage</span>
             </a>
             <a class="flex items-center gap-sm p-sm bg-primary-container dark:bg-secondary-container text-on-primary-container dark:text-on-secondary-container rounded-lg font-bold transition-all"
-                href="#">
+                href="{% url 'dashboard:settings' %}">
                 <span class="material-symbols-outlined" data-icon="settings">settings</span>
                 <span class="font-label-md text-label-md">Settings</span>
             </a>
