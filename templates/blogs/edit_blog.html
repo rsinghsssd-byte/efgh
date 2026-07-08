@@ -22,7 +22,7 @@ Edit Blog
 
             </a>
 
-            <h1 class="text-4xl font-bold mt-3">
+            <h1 class="text-5xl font-extrabold mt-3 tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
 
                 Edit Blog
 
@@ -37,9 +37,9 @@ Edit Blog
         </div>
 
         <button id="saveButton" type="button"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow">
+            class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-3 rounded-2xl shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-1 transition-all duration-300 font-semibold">
 
-            💾 Save Changes
+            <i data-lucide="save" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Save Changes
 
         </button>
 
@@ -47,7 +47,7 @@ Edit Blog
 
     <!-- ================= BLOG DETAILS ================= -->
 
-    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow border p-6">
+    <div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-xl transition-all duration-300">
 
         <h2 class="text-2xl font-semibold mb-6">
 
@@ -65,7 +65,7 @@ Edit Blog
 
                 </label>
 
-                <input id="title" value="{{ blog.title }}" class="mt-2 w-full border rounded-xl p-3">
+                <input id="title" value="{{ blog.title }}" class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">
 
             </div>
 
@@ -78,7 +78,7 @@ Edit Blog
                 </label>
 
                 <textarea id="description" rows="5"
-                    class="mt-2 w-full border rounded-xl p-3">{{ blog.description }}</textarea>
+                    class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">{{ blog.description }}</textarea>
 
             </div>
 
@@ -86,7 +86,7 @@ Edit Blog
 
                 <label>Category</label>
 
-                <input id="category" value="{{ blog.category }}" class="mt-2 w-full border rounded-xl p-3">
+                <input id="category" value="{{ blog.category }}" class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">
 
             </div>
 
@@ -94,7 +94,7 @@ Edit Blog
 
                 <label>Language</label>
 
-                <input id="language" value="{{ blog.language }}" class="mt-2 w-full border rounded-xl p-3">
+                <input id="language" value="{{ blog.language }}" class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">
 
             </div>
 
@@ -102,7 +102,7 @@ Edit Blog
 
                 <label>Tone</label>
 
-                <input id="tone" value="{{ blog.tone }}" class="mt-2 w-full border rounded-xl p-3">
+                <input id="tone" value="{{ blog.tone }}" class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">
 
             </div>
 
@@ -110,7 +110,7 @@ Edit Blog
 
                 <label>Target Audience</label>
 
-                <input id="targetAudience" value="{{ blog.target_audience }}" class="mt-2 w-full border rounded-xl p-3">
+                <input id="targetAudience" value="{{ blog.target_audience }}" class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">
 
             </div>
 
@@ -118,7 +118,7 @@ Edit Blog
 
                 <label>Status</label>
 
-                <select id="status" class="mt-2 w-full border rounded-xl p-3">
+                <select id="status" class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none">
 
                     <option value="draft" {% if blog.status == "draft" %}selected{% endif %}>
                         Draft
@@ -141,7 +141,7 @@ Edit Blog
                 <label>Generation Version</label>
 
                 <input disabled value="v{{ blog.generation_version }}"
-                    class="mt-2 w-full rounded-xl p-3 bg-slate-100 dark:bg-slate-800">
+                    class="mt-2 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-slate-100/50 dark:bg-slate-800/50 shadow-inner cursor-not-allowed outline-none">
 
             </div>
 
@@ -151,7 +151,7 @@ Edit Blog
 
     <!-- ================= HERO IMAGE ================= -->
 
-    <div class="mt-8 bg-white dark:bg-slate-900 rounded-2xl shadow border p-6">
+    <div class="mt-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-xl transition-all duration-300">
 
         <div class="flex items-center justify-between mb-5">
 
@@ -172,9 +172,9 @@ Edit Blog
             </div>
 
             <button type="button"
-                class="regenerate-hero bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl">
+                class="regenerate-hero bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-2.5 rounded-2xl shadow-lg hover:shadow-teal-500/25 hover:-translate-y-0.5 transition-all duration-300 font-medium">
 
-                🖼 Regenerate Hero Image
+                <i data-lucide="image" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Regenerate Hero Image
 
             </button>
 
@@ -203,7 +203,7 @@ Edit Blog
 
         {% for chapter in chapters %}
 
-        <div class="chapter-card bg-white dark:bg-slate-900 rounded-2xl shadow border p-6"
+        <div class="chapter-card bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-xl transition-all duration-300"
             data-chapter="{{ chapter.id }}">
 
             <!-- ====================================== -->
@@ -226,10 +226,10 @@ Edit Blog
                 </div>
 
                 <button type="button"
-                    class="regenerate-chapter bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl"
+                    class="regenerate-chapter bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-2xl shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 transition-all duration-300 font-medium"
                     data-chapter="{{ chapter.id }}">
 
-                    ✨ Regenerate Chapter
+                    <i data-lucide="sparkles" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Regenerate Chapter
 
                 </button>
 
@@ -250,10 +250,10 @@ Edit Blog
                 <div class="mt-4">
 
                     <button type="button"
-                        class="regenerate-image bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl"
+                        class="regenerate-image bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-2.5 rounded-2xl shadow-lg hover:shadow-teal-500/25 hover:-translate-y-0.5 transition-all duration-300 font-medium"
                         data-chapter="{{ chapter.id }}">
 
-                        🖼 Regenerate Image
+                        <i data-lucide="image" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Regenerate Image
 
                     </button>
 
@@ -269,7 +269,7 @@ Edit Blog
 
             {% for paragraph in chapter.paragraphs %}
 
-            <div class="paragraph-block border rounded-xl p-5 mb-6">
+            <div class="paragraph-block border border-slate-200/50 dark:border-slate-700/50 bg-slate-50/40 dark:bg-slate-800/40 rounded-2xl p-6 mb-8 hover:shadow-md transition-shadow">
 
                 <div class="flex items-center justify-between mb-3">
 
@@ -280,16 +280,16 @@ Edit Blog
                     </h4>
 
                     <button type="button"
-                        class="regenerate-paragraph bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                        class="regenerate-paragraph bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-5 py-2 rounded-xl shadow-md hover:shadow-indigo-500/25 hover:-translate-y-0.5 transition-all duration-300 font-medium text-sm"
                         data-chapter="{{ chapter.id }}" data-index="{{ forloop.counter0 }}">
 
-                        ✨ Regenerate
+                        <i data-lucide="sparkles" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Regenerate
 
                     </button>
 
                 </div>
 
-                <textarea rows="7" class="chapter-paragraph w-full border rounded-xl p-4"
+                <textarea rows="7" class="chapter-paragraph w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-5 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none leading-relaxed"
                     data-chapter="{{ chapter.id }}" data-index="{{ forloop.counter0 }}">{{ paragraph }}</textarea>
 
             </div>
@@ -310,7 +310,7 @@ Edit Blog
 
                 </label>
 
-                <textarea rows="6" class="chapter-bullets mt-3 w-full border rounded-xl p-4"
+                <textarea rows="6" class="chapter-bullets mt-3 w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-5 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none leading-relaxed"
                     data-chapter="{{ chapter.id }}">{% for point in chapter.bullet_points %}{{ point }}
 {% endfor %}</textarea>
 
@@ -331,15 +331,15 @@ Edit Blog
     <div class="mt-10 flex flex-wrap gap-4 justify-end">
 
         <button id="regenerateBlog" type="button"
-            class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl">
+            class="bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white px-8 py-3 rounded-2xl shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 transition-all duration-300 font-semibold flex items-center gap-2">
 
-            ✨ Regenerate Entire Blog
+            <i data-lucide="sparkles" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Regenerate Entire Blog
 
         </button>
 
-        <button id="saveBottom" type="button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
+        <button id="saveBottom" type="button" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-3 rounded-2xl shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-1 transition-all duration-300 font-semibold">
 
-            💾 Save Changes
+            <i data-lucide="save" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Save Changes
 
         </button>
 
@@ -352,17 +352,17 @@ Edit Blog
     </div>
     <div id="paragraphModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
 
-        <div class="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-3xl p-6">
+        <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-[2rem] w-full max-w-3xl p-8 shadow-2xl border border-white/20 dark:border-white/10">
 
             <h2 class="text-2xl font-bold mb-6">
                 Regenerated Paragraph
             </h2>
 
-            <textarea id="newParagraph" rows="12" class="w-full border rounded-xl p-4"></textarea>
+            <textarea id="newParagraph" rows="12" class="w-full border border-slate-200 dark:border-slate-700 rounded-2xl p-5 bg-white/50 dark:bg-slate-950/50 focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner outline-none leading-relaxed"></textarea>
 
             <div class="flex justify-end gap-3 mt-6">
 
-                <button id="cancelParagraph" class="px-5 py-2 rounded-xl border">
+                <button id="cancelParagraph" class="px-6 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">
 
                     Reject
 
@@ -383,7 +383,7 @@ Edit Blog
 
         <div class="min-h-screen flex items-center justify-center p-6">
 
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-5xl">
+            <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-[2rem] shadow-2xl w-full max-w-5xl border border-white/20 dark:border-white/10">
 
                 <div class="p-6 border-b">
 
@@ -414,7 +414,7 @@ Edit Blog
 
                 <div class="flex justify-end gap-3 p-6 border-t">
 
-                    <button id="rejectImage" class="px-5 py-2 rounded-xl border">
+                    <button id="rejectImage" class="px-6 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">
 
                         Reject
 
@@ -435,7 +435,7 @@ Edit Blog
     </div>
     <div id="chapterModal" class="fixed inset-0 hidden items-center justify-center bg-black/60 z-50">
 
-        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-[2rem] p-8 max-w-5xl border border-white/20 dark:border-white/10 shadow-2xl w-full max-h-[90vh] overflow-y-auto">
 
             <h2 class="text-2xl font-bold mb-4">
                 Preview Chapter
@@ -449,7 +449,7 @@ Edit Blog
 
             <div class="flex justify-end gap-3 mt-6">
 
-                <button id="cancelChapter" class="px-5 py-2 border rounded-xl">
+                <button id="cancelChapter" class="px-6 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">
 
                     Reject
 
@@ -477,7 +477,7 @@ Edit Blog
             <div class="flex items-center gap-3 mb-4">
 
                 <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-2xl">
-                    ✨
+                    <i data-lucide="sparkles" class="w-5 h-5 inline-block -mt-1 mr-1"></i> 
                 </div>
 
                 <div>
@@ -534,16 +534,16 @@ Edit Blog
 
             <div class="flex justify-end gap-3">
 
-                <button id="cancelRegenerateBlog" class="px-5 py-2 rounded-xl border">
+                <button id="cancelRegenerateBlog" class="px-6 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium">
 
                     Cancel
 
                 </button>
 
                 <button id="confirmRegenerateBlog"
-                    class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl">
+                    class="bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-2xl shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 transition-all duration-300 font-medium">
 
-                    ✨ Regenerate
+                    <i data-lucide="sparkles" class="w-5 h-5 inline-block -mt-1 mr-1"></i> Regenerate
 
                 </button>
 
