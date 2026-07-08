@@ -1,0 +1,743 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | AI Blog Generator
+{% endblock %}
+
+{% block content %}
+
+<div class="space-y-10">
+
+    <!-- ================================================= -->
+    <!-- Hero -->
+    <!-- ================================================= -->
+
+    <!-- ================================================= -->
+<!-- Hero -->
+<!-- ================================================= -->
+
+<section
+    class="relative overflow-hidden rounded-[2rem]
+    bg-gradient-to-br
+    from-blue-600
+    via-indigo-600
+    to-violet-700
+    px-8 py-10 lg:px-10 lg:py-12
+    text-white
+    shadow-2xl">
+
+    <!-- Decorative Blur -->
+    <div
+        class="absolute -top-28 -right-24 h-80 w-80 rounded-full bg-white/10 blur-3xl">
+    </div>
+
+    <div
+        class="absolute -bottom-28 -left-24 h-80 w-80 rounded-full bg-white/10 blur-3xl">
+    </div>
+
+    <div class="relative z-10">
+
+        <div
+            class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-10">
+
+            <!-- Left -->
+            <div class="max-w-3xl">
+
+                <div
+                    class="inline-flex items-center gap-2
+                    rounded-full
+                    border border-white/15
+                    bg-white/10
+                    px-4 py-2
+                    backdrop-blur">
+
+                    <i
+                        data-lucide="sparkles"
+                        class="w-4 h-4">
+                    </i>
+
+                    <span class="text-sm font-medium">
+
+                        AI Powered Blogging Platform
+
+                    </span>
+
+                </div>
+
+                <h1
+                    class="mt-6
+                    text-4xl
+                    md:text-5xl
+                    xl:text-6xl
+                    font-extrabold
+                    tracking-tight
+                    leading-tight">
+
+                    Create Amazing Blogs
+
+                    <span class="block text-blue-100">
+
+                        in Minutes.
+
+                    </span>
+
+                </h1>
+
+                <p
+                    class="mt-6 max-w-2xl
+                    text-lg
+                    leading-8
+                    text-blue-100">
+
+                    Generate complete AI-powered blog articles with
+                    beautiful images, structured chapters, FAQs,
+                    key takeaways, resources, and conclusions —
+                    all from one modern dashboard.
+
+                </p>
+
+                <div
+                    class="mt-8 flex flex-wrap gap-4">
+
+                    <a
+                        href="{% url 'blogs:generate' %}"
+                        class="group inline-flex items-center gap-3
+                        rounded-2xl
+                        bg-white
+                        px-6 py-3.5
+                        font-semibold
+                        text-blue-700
+                        shadow-xl
+                        transition-all
+                        hover:-translate-y-1
+                        hover:shadow-2xl">
+
+                        <i
+                            data-lucide="sparkles"
+                            class="w-5 h-5 transition-transform group-hover:rotate-12">
+                        </i>
+
+                        Generate Blog
+
+                    </a>
+
+                    <a
+                        href="{% url 'blogs:my_blogs' %}"
+                        class="group inline-flex items-center gap-3
+                        rounded-2xl
+                        border border-white/20
+                        bg-white/10
+                        px-6 py-3.5
+                        font-medium
+                        backdrop-blur
+                        transition-all
+                        hover:bg-white/20">
+
+                        <i
+                            data-lucide="book-open"
+                            class="w-5 h-5 transition-transform group-hover:scale-110">
+                        </i>
+
+                        My Blogs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Right -->
+
+            <div
+                class="grid w-full max-w-md gap-5 sm:grid-cols-2">
+
+                <!-- Total Blogs -->
+
+                <div
+                    class="rounded-3xl
+                    border border-white/15
+                    bg-white/10
+                    p-6
+                    backdrop-blur">
+
+                    <div
+                        class="flex items-center justify-between">
+
+                        <div
+                            class="flex h-12 w-12 items-center justify-center
+                            rounded-2xl
+                            bg-white/15">
+
+                            <i
+                                data-lucide="file-text"
+                                class="w-6 h-6">
+                            </i>
+
+                        </div>
+
+                        <span
+                            class="rounded-full
+                            bg-white/15
+                            px-3 py-1
+                            text-xs">
+
+                            Blogs
+
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="mt-6 text-5xl font-bold">
+
+                        {{ total_blogs }}
+
+                    </div>
+
+                    <p
+                        class="mt-2 text-blue-100">
+
+                        Total blogs created
+
+                    </p>
+
+                </div>
+
+                <!-- Images -->
+
+                <div
+                    class="rounded-3xl
+                    border border-white/15
+                    bg-white/10
+                    p-6
+                    backdrop-blur">
+
+                    <div
+                        class="flex items-center justify-between">
+
+                        <div
+                            class="flex h-12 w-12 items-center justify-center
+                            rounded-2xl
+                            bg-white/15">
+
+                            <i
+                                data-lucide="image"
+                                class="w-6 h-6">
+                            </i>
+
+                        </div>
+
+                        <span
+                            class="rounded-full
+                            bg-white/15
+                            px-3 py-1
+                            text-xs">
+
+                            Images
+
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="mt-6 text-5xl font-bold">
+
+                        {{ total_images }}
+
+                    </div>
+
+                    <p
+                        class="mt-2 text-blue-100">
+
+                        AI images generated
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+    <!-- ================================================= -->
+<!-- Quick Actions -->
+<!-- ================================================= -->
+
+<section>
+
+    <div class="flex items-center justify-between mb-6">
+
+        <div>
+
+            <h2 class="text-3xl font-bold">
+
+                Quick Actions
+
+            </h2>
+
+            <p class="mt-2 text-slate-500 dark:text-slate-400">
+
+                Everything you need to create and manage your AI blogs.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+
+        <!-- Generate Blog -->
+
+        <a
+            href="{% url 'blogs:generate' %}"
+            class="group relative overflow-hidden rounded-[2rem]
+            border border-slate-200 dark:border-slate-800
+            bg-white dark:bg-slate-900
+            p-8
+            shadow-soft
+            transition-all duration-300
+            hover:-translate-y-2
+            hover:shadow-card">
+
+            <!-- Decorative Circle -->
+
+            <div
+                class="absolute -right-8 -top-8
+                h-40 w-40
+                rounded-full
+                bg-blue-500/10
+                blur-3xl">
+            </div>
+
+            <div class="relative">
+
+                <div
+                    class="flex h-16 w-16
+                    items-center justify-center
+                    rounded-3xl
+                    bg-gradient-to-br
+                    from-blue-600
+                    to-indigo-600
+                    text-white
+                    shadow-lg">
+
+                    <i
+                        data-lucide="sparkles"
+                        class="w-8 h-8">
+                    </i>
+
+                </div>
+
+                <h3
+                    class="mt-7 text-2xl font-bold">
+
+                    Generate Blog
+
+                </h3>
+
+                <p
+                    class="mt-4 leading-7 text-slate-500 dark:text-slate-400">
+
+                    Create complete AI-generated blog posts with
+                    structured chapters, beautiful AI images,
+                    FAQs, key takeaways and conclusions.
+
+                </p>
+
+                <div
+                    class="mt-8 inline-flex items-center gap-2
+                    font-semibold text-blue-600">
+
+                    Start Creating
+
+                    <i
+                        data-lucide="arrow-right"
+                        class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </a>
+
+        <!-- My Blogs -->
+
+        <a
+            href="{% url 'blogs:my_blogs' %}"
+            class="group relative overflow-hidden rounded-[2rem]
+            border border-slate-200 dark:border-slate-800
+            bg-white dark:bg-slate-900
+            p-8
+            shadow-soft
+            transition-all duration-300
+            hover:-translate-y-2
+            hover:shadow-card">
+
+            <!-- Decorative Circle -->
+
+            <div
+                class="absolute -right-8 -top-8
+                h-40 w-40
+                rounded-full
+                bg-emerald-500/10
+                blur-3xl">
+            </div>
+
+            <div class="relative">
+
+                <div
+                    class="flex h-16 w-16
+                    items-center justify-center
+                    rounded-3xl
+                    bg-gradient-to-br
+                    from-emerald-500
+                    to-green-600
+                    text-white
+                    shadow-lg">
+
+                    <i
+                        data-lucide="book-open"
+                        class="w-8 h-8">
+                    </i>
+
+                </div>
+
+                <h3
+                    class="mt-7 text-2xl font-bold">
+
+                    My Blogs
+
+                </h3>
+
+                <p
+                    class="mt-4 leading-7 text-slate-500 dark:text-slate-400">
+
+                    Browse, edit, regenerate, export and organize
+                    every AI blog you've created from one place.
+
+                </p>
+
+                <div
+                    class="mt-8 inline-flex items-center gap-2
+                    font-semibold text-emerald-600">
+
+                    Open Library
+
+                    <i
+                        data-lucide="arrow-right"
+                        class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+    <!-- ================================================= -->
+<!-- Recent Blogs -->
+<!-- ================================================= -->
+
+<section>
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+
+        <div>
+
+            <h2 class="text-3xl font-bold">
+
+                Recent Blogs
+
+            </h2>
+
+            <p class="mt-2 text-slate-500 dark:text-slate-400">
+
+                Continue working on your latest AI generated content.
+
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'blogs:my_blogs' %}"
+            class="inline-flex items-center gap-2
+            rounded-xl
+            border border-slate-200 dark:border-slate-700
+            bg-white dark:bg-slate-900
+            px-5 py-3
+            font-medium
+            transition-all
+            hover:shadow-lg
+            hover:-translate-y-0.5">
+
+            View All
+
+            <i
+                data-lucide="arrow-right"
+                class="w-4 h-4">
+            </i>
+
+        </a>
+
+    </div>
+
+    {% if recent_blogs %}
+
+    <div class="grid gap-6 lg:grid-cols-2">
+
+        {% for blog in recent_blogs %}
+
+        <article
+            class="group overflow-hidden rounded-[2rem]
+            border border-slate-200 dark:border-slate-800
+            bg-white dark:bg-slate-900
+            shadow-soft
+            transition-all duration-300
+            hover:-translate-y-2
+            hover:shadow-card">
+
+            <!-- Hero -->
+
+            <div
+                class="relative h-48 overflow-hidden
+                bg-gradient-to-br
+                from-blue-600
+                via-indigo-600
+                to-violet-700">
+
+                {% if blog.hero.image.path %}
+
+                <img
+                    src="{{ blog.hero.image.path }}"
+                    alt="{{ blog.title }}"
+                    class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+
+                {% else %}
+
+                <div
+                    class="flex h-full items-center justify-center">
+
+                    <i
+                        data-lucide="image"
+                        class="w-14 h-14 text-white/60">
+                    </i>
+
+                </div>
+
+                {% endif %}
+
+                <div
+                    class="absolute inset-0
+                    bg-gradient-to-t
+                    from-black/60
+                    via-black/10
+                    to-transparent">
+                </div>
+
+                <div
+                    class="absolute bottom-5 left-5">
+
+                    <span
+                        class="rounded-full
+                        bg-white/20
+                        backdrop-blur
+                        px-3 py-1
+                        text-sm
+                        text-white">
+
+                        {{ blog.category }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Content -->
+
+            <div class="p-6">
+
+                <h3
+                    class="text-2xl font-bold
+                    line-clamp-2
+                    group-hover:text-blue-600
+                    transition-colors">
+
+                    {{ blog.title }}
+
+                </h3>
+
+                <div
+                    class="mt-5 flex flex-wrap gap-3 text-sm">
+
+                    <span
+                        class="inline-flex items-center gap-2
+                        rounded-full
+                        bg-slate-100 dark:bg-slate-800
+                        px-3 py-1">
+
+                        <i
+                            data-lucide="calendar-days"
+                            class="w-4 h-4 text-blue-600">
+                        </i>
+
+                        {{ blog.created_at|date:"d M Y" }}
+
+                    </span>
+
+                    <span
+                        class="inline-flex items-center gap-2
+                        rounded-full
+                        bg-slate-100 dark:bg-slate-800
+                        px-3 py-1">
+
+                        <i
+                            data-lucide="languages"
+                            class="w-4 h-4 text-green-600">
+                        </i>
+
+                        {{ blog.language }}
+
+                    </span>
+
+                </div>
+
+                <div
+                    class="mt-6 flex gap-3">
+
+                    <a
+                        href="{% url 'blogs:detail' blog.id %}"
+                        class="flex-1 inline-flex items-center justify-center gap-2
+                        rounded-xl
+                        border border-slate-300 dark:border-slate-700
+                        px-5 py-3
+                        transition-all
+                        hover:bg-slate-100
+                        dark:hover:bg-slate-800">
+
+                        <i
+                            data-lucide="eye"
+                            class="w-4 h-4">
+                        </i>
+
+                        View
+
+                    </a>
+
+                    <a
+                        href="{% url 'blogs:edit' blog.id %}"
+                        class="flex-1 inline-flex items-center justify-center gap-2
+                        rounded-xl
+                        bg-gradient-to-r
+                        from-blue-600
+                        to-indigo-600
+                        px-5 py-3
+                        text-white
+                        shadow-lg
+                        shadow-blue-500/20
+                        transition-all
+                        hover:-translate-y-0.5
+                        hover:shadow-xl">
+
+                        <i
+                            data-lucide="square-pen"
+                            class="w-4 h-4">
+                        </i>
+
+                        Edit
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div
+        class="rounded-[2rem]
+        border border-dashed border-slate-300 dark:border-slate-700
+        bg-white dark:bg-slate-900
+        py-24 px-8
+        text-center">
+
+        <div
+            class="mx-auto flex h-24 w-24
+            items-center justify-center
+            rounded-full
+            bg-blue-100 dark:bg-blue-900/30">
+
+            <i
+                data-lucide="file-text"
+                class="w-12 h-12 text-blue-600">
+            </i>
+
+        </div>
+
+        <h3
+            class="mt-8 text-3xl font-bold">
+
+            No Blogs Yet
+
+        </h3>
+
+        <p
+            class="mx-auto mt-4 max-w-xl
+            text-slate-500 dark:text-slate-400">
+
+            Generate your first AI-powered blog complete with
+            images, chapters, FAQs and key takeaways.
+
+        </p>
+
+        <a
+            href="{% url 'blogs:generate' %}"
+            class="mt-8 inline-flex items-center gap-3
+            rounded-2xl
+            bg-gradient-to-r
+            from-blue-600
+            to-indigo-600
+            px-8 py-4
+            font-semibold
+            text-white
+            shadow-lg
+            shadow-blue-500/20
+            transition-all
+            hover:-translate-y-1
+            hover:shadow-xl">
+
+            <i
+                data-lucide="sparkles"
+                class="w-5 h-5">
+            </i>
+
+            Generate First Blog
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+</div>
+
+{% endblock %}

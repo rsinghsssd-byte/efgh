@@ -1,0 +1,1485 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Blog
+{% endblock %}
+
+{% block content %}
+
+{% csrf_token %}
+
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="flex items-center justify-between mb-8">
+
+        <div>
+
+            <a href="{% url 'blogs:my_blogs' %}" class="text-blue-600 hover:text-blue-700">
+
+                ← Back to My Blogs
+
+            </a>
+
+            <h1 class="text-4xl font-bold mt-3">
+
+                Edit Blog
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                Edit your generated blog and save changes.
+
+            </p>
+
+        </div>
+
+        <button id="saveButton" type="button"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow">
+
+            💾 Save Changes
+
+        </button>
+
+    </div>
+
+    <!-- ================= BLOG DETAILS ================= -->
+
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow border p-6">
+
+        <h2 class="text-2xl font-semibold mb-6">
+
+            Blog Details
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-5">
+
+            <div class="md:col-span-2">
+
+                <label class="font-medium">
+
+                    Title
+
+                </label>
+
+                <input id="title" value="{{ blog.title }}" class="mt-2 w-full border rounded-xl p-3">
+
+            </div>
+
+            <div class="md:col-span-2">
+
+                <label class="font-medium">
+
+                    Description
+
+                </label>
+
+                <textarea id="description" rows="5"
+                    class="mt-2 w-full border rounded-xl p-3">{{ blog.description }}</textarea>
+
+            </div>
+
+            <div>
+
+                <label>Category</label>
+
+                <input id="category" value="{{ blog.category }}" class="mt-2 w-full border rounded-xl p-3">
+
+            </div>
+
+            <div>
+
+                <label>Language</label>
+
+                <input id="language" value="{{ blog.language }}" class="mt-2 w-full border rounded-xl p-3">
+
+            </div>
+
+            <div>
+
+                <label>Tone</label>
+
+                <input id="tone" value="{{ blog.tone }}" class="mt-2 w-full border rounded-xl p-3">
+
+            </div>
+
+            <div>
+
+                <label>Target Audience</label>
+
+                <input id="targetAudience" value="{{ blog.target_audience }}" class="mt-2 w-full border rounded-xl p-3">
+
+            </div>
+
+            <div>
+
+                <label>Status</label>
+
+                <select id="status" class="mt-2 w-full border rounded-xl p-3">
+
+                    <option value="draft" {% if blog.status == "draft" %}selected{% endif %}>
+                        Draft
+                    </option>
+
+                    <option value="published" {% if blog.status == "published" %}selected{% endif %}>
+                        Published
+                    </option>
+
+                    <option value="archived" {% if blog.status == "archived" %}selected{% endif %}>
+                        Archived
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Generation Version</label>
+
+                <input disabled value="v{{ blog.generation_version }}"
+                    class="mt-2 w-full rounded-xl p-3 bg-slate-100 dark:bg-slate-800">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= HERO IMAGE ================= -->
+
+    <div class="mt-8 bg-white dark:bg-slate-900 rounded-2xl shadow border p-6">
+
+        <div class="flex items-center justify-between mb-5">
+
+            <div>
+
+                <h2 class="text-2xl font-semibold">
+
+                    Hero Image
+
+                </h2>
+
+                <p class="text-slate-500">
+
+                    Main image of the blog
+
+                </p>
+
+            </div>
+
+            <button type="button"
+                class="regenerate-hero bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl">
+
+                🖼 Regenerate Hero Image
+
+            </button>
+
+        </div>
+
+        {% if blog.hero.image.path %}
+
+        <img class="hero-image" src="{{ blog.hero.image.path }}" data-storage-path="{{ blog.hero.image.storage_path }}"
+            data-prompt="{{ blog.hero.image.prompt }}" alt="{{ blog.hero.image.alt_text }}"
+            class="rounded-xl w-full border">
+
+        {% else %}
+
+        <div class="border-2 border-dashed rounded-xl py-20 text-center text-slate-500">
+
+            No Hero Image
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ================= CHAPTERS START ================= -->
+    <div class="mt-8 space-y-8">
+
+        {% for chapter in chapters %}
+
+        <div class="chapter-card bg-white dark:bg-slate-900 rounded-2xl shadow border p-6"
+            data-chapter="{{ chapter.id }}">
+
+            <!-- ====================================== -->
+            <!-- Chapter Header -->
+            <!-- ====================================== -->
+
+            <div class="flex items-center justify-between mb-6">
+
+                <div class="flex-1">
+
+                    <p class="text-sm text-slate-500">
+
+                        Chapter {{ chapter.order }}
+
+                    </p>
+
+                    <input type="text" class="chapter-title w-full mt-2 text-3xl font-bold bg-transparent outline-none"
+                        data-chapter="{{ chapter.id }}" value="{{ chapter.title }}">
+
+                </div>
+
+                <button type="button"
+                    class="regenerate-chapter bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl"
+                    data-chapter="{{ chapter.id }}">
+
+                    ✨ Regenerate Chapter
+
+                </button>
+
+            </div>
+
+            <!-- ====================================== -->
+            <!-- Chapter Image -->
+            <!-- ====================================== -->
+
+            {% if chapter.image.path %}
+
+            <div class="mb-8">
+
+                <img class="chapter-image" src="{{ chapter.image.path }}"
+                    data-storage-path="{{ chapter.image.storage_path }}" data-prompt="{{ chapter.image.prompt }}"
+                    alt="{{ chapter.image.alt_text }}" class="rounded-xl border w-full">
+
+                <div class="mt-4">
+
+                    <button type="button"
+                        class="regenerate-image bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl"
+                        data-chapter="{{ chapter.id }}">
+
+                        🖼 Regenerate Image
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+            <!-- ====================================== -->
+            <!-- Paragraphs -->
+            <!-- ====================================== -->
+
+            {% for paragraph in chapter.paragraphs %}
+
+            <div class="paragraph-block border rounded-xl p-5 mb-6">
+
+                <div class="flex items-center justify-between mb-3">
+
+                    <h4 class="font-semibold">
+
+                        Paragraph {{ forloop.counter }}
+
+                    </h4>
+
+                    <button type="button"
+                        class="regenerate-paragraph bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                        data-chapter="{{ chapter.id }}" data-index="{{ forloop.counter0 }}">
+
+                        ✨ Regenerate
+
+                    </button>
+
+                </div>
+
+                <textarea rows="7" class="chapter-paragraph w-full border rounded-xl p-4"
+                    data-chapter="{{ chapter.id }}" data-index="{{ forloop.counter0 }}">{{ paragraph }}</textarea>
+
+            </div>
+
+            {% endfor %}
+
+            <!-- ====================================== -->
+            <!-- Bullet Points -->
+            <!-- ====================================== -->
+
+            {% if chapter.bullet_points %}
+
+            <div class="mt-8">
+
+                <label class="font-semibold">
+
+                    Bullet Points
+
+                </label>
+
+                <textarea rows="6" class="chapter-bullets mt-3 w-full border rounded-xl p-4"
+                    data-chapter="{{ chapter.id }}">{% for point in chapter.bullet_points %}{{ point }}
+{% endfor %}</textarea>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- ====================================== -->
+    <!-- Bottom Actions -->
+    <!-- ====================================== -->
+
+    <div class="mt-10 flex flex-wrap gap-4 justify-end">
+
+        <button id="regenerateBlog" type="button"
+            class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl">
+
+            ✨ Regenerate Entire Blog
+
+        </button>
+
+        <button id="saveBottom" type="button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
+
+            💾 Save Changes
+
+        </button>
+
+    </div>
+
+    <!-- Toast -->
+
+    <div id="toast" class="hidden fixed top-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-xl z-50">
+
+    </div>
+    <div id="paragraphModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+        <div class="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-3xl p-6">
+
+            <h2 class="text-2xl font-bold mb-6">
+                Regenerated Paragraph
+            </h2>
+
+            <textarea id="newParagraph" rows="12" class="w-full border rounded-xl p-4"></textarea>
+
+            <div class="flex justify-end gap-3 mt-6">
+
+                <button id="cancelParagraph" class="px-5 py-2 rounded-xl border">
+
+                    Reject
+
+                </button>
+
+                <button id="acceptParagraph" class="bg-blue-600 text-white px-5 py-2 rounded-xl">
+
+                    Accept
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="imageModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/60">
+
+        <div class="min-h-screen flex items-center justify-center p-6">
+
+            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl w-full max-w-5xl">
+
+                <div class="p-6 border-b">
+
+                    <h2 class="text-2xl font-bold">
+                        Preview New Image
+                    </h2>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div id="imageLoading" class="flex flex-col items-center justify-center py-24">
+
+                        <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin">
+                        </div>
+
+                        <p class="mt-4 text-slate-600 dark:text-slate-300">
+
+                            Generating image...
+
+                        </p>
+
+                    </div>
+
+                    <img id="previewImage" class="hidden w-full max-h-[70vh] object-contain rounded-xl border">
+
+                </div>
+
+                <div class="flex justify-end gap-3 p-6 border-t">
+
+                    <button id="rejectImage" class="px-5 py-2 rounded-xl border">
+
+                        Reject
+
+                    </button>
+
+                    <button id="acceptImage" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl">
+
+                        Accept
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div id="chapterModal" class="fixed inset-0 hidden items-center justify-center bg-black/60 z-50">
+
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+
+            <h2 class="text-2xl font-bold mb-4">
+                Preview Chapter
+            </h2>
+
+            <input id="newChapterTitle" class="w-full border rounded-lg p-3 mb-4">
+
+            <textarea id="newChapterParagraphs" class="w-full h-72 border rounded-lg p-3 mb-4"></textarea>
+
+            <textarea id="newChapterBullets" class="w-full h-40 border rounded-lg p-3"></textarea>
+
+            <div class="flex justify-end gap-3 mt-6">
+
+                <button id="cancelChapter" class="px-5 py-2 border rounded-xl">
+
+                    Reject
+
+                </button>
+
+                <button id="acceptChapter" class="px-5 py-2 rounded-xl bg-blue-600 text-white">
+
+                    Accept
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- ==========================================
+     Regenerate Blog Modal
+========================================== -->
+
+    <div id="regenerateBlogModal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center">
+
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+
+                <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-2xl">
+                    ✨
+                </div>
+
+                <div>
+
+                    <h2 class="text-xl font-bold">
+                        Regenerate Entire Blog
+                    </h2>
+
+                    <p class="text-slate-500 text-sm">
+                        Replace the current blog with a newly generated version.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+
+                <p class="text-sm text-amber-800">
+
+                    <strong>Warning:</strong>
+
+                    This will regenerate:
+
+                </p>
+
+                <ul class="mt-2 text-sm text-amber-800 list-disc list-inside">
+
+                    <li>Hero section</li>
+
+                    <li>All chapters</li>
+
+                    <li>All images</li>
+
+                    <li>Key takeaways</li>
+
+                    <li>FAQ</li>
+
+                    <li>Resources</li>
+
+                    <li>Call to Action</li>
+
+                    <li>Conclusion</li>
+
+                </ul>
+
+                <p class="mt-3 text-sm font-medium text-red-600">
+
+                    This action cannot be undone.
+
+                </p>
+
+            </div>
+
+            <div class="flex justify-end gap-3">
+
+                <button id="cancelRegenerateBlog" class="px-5 py-2 rounded-xl border">
+
+                    Cancel
+
+                </button>
+
+                <button id="confirmRegenerateBlog"
+                    class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl">
+
+                    ✨ Regenerate
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        let currentLoadingButton = null;
+        let currentImage = null;
+        let generatedImage = null;
+        let currentTextarea = null;
+        const BLOG_ID = "{{ blog.id }}";
+        function setLoading(button, text) {
+
+            button.disabled = true;
+
+            button.dataset.original = button.innerHTML;
+
+            button.classList.add(
+                "opacity-60",
+                "cursor-not-allowed"
+            );
+
+            button.innerHTML = `
+        <svg class="animate-spin h-4 w-4 inline mr-2"
+             viewBox="0 0 24 24"
+             fill="none">
+
+            <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"></circle>
+
+            <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+            </path>
+
+        </svg>
+
+        ${text}
+    `;
+
+        }
+
+        function stopLoading(button) {
+
+            if (!button) return;
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "opacity-60",
+                "cursor-not-allowed"
+            );
+
+            button.innerHTML = button.dataset.original;
+
+        }
+        /* ==========================================
+           CSRF
+        ========================================== */
+
+        function getCSRFToken() {
+
+            return document.querySelector(
+                "[name=csrfmiddlewaretoken]"
+            ).value;
+
+        }
+
+        /* ==========================================
+           Toast
+        ========================================== */
+
+        function showToast(message, success = true) {
+
+            const toast = document.getElementById("toast");
+
+            toast.innerHTML = message;
+
+            toast.classList.remove("hidden");
+
+            toast.classList.remove(
+                "bg-red-600",
+                "bg-green-600",
+                "bg-slate-900"
+            );
+
+            toast.classList.add(
+
+                success
+                    ? "bg-green-600"
+                    : "bg-red-600"
+
+            );
+
+            setTimeout(() => {
+
+                toast.classList.add("hidden");
+
+            }, 2500);
+
+        }
+
+        /* ==========================================
+           Collect Blog
+        ========================================== */
+
+        function collectBlogData() {
+
+            const blog = {
+
+                title:
+                    document.getElementById("title").value,
+
+                description:
+                    document.getElementById("description").value,
+
+                category:
+                    document.getElementById("category").value,
+
+                language:
+                    document.getElementById("language").value,
+
+                tone:
+                    document.getElementById("tone").value,
+
+                target_audience:
+                    document.getElementById("targetAudience").value,
+
+                status:
+                    document.getElementById("status").value,
+
+                chapters: []
+
+            };
+
+            // Hero image
+            const heroImg = document.querySelector(".hero-image");
+
+            blog.hero = {
+
+                image: {
+
+                    path: heroImg.src,
+
+                    storage_path: heroImg.dataset.storagePath,
+
+                    prompt: heroImg.dataset.prompt,
+
+                    alt_text: heroImg.alt,
+
+                    provider: "pollinations",
+
+                }
+
+            };
+
+            document
+                .querySelectorAll(".chapter-card")
+                .forEach(card => {
+
+                    const chapterId = card.dataset.chapter;
+
+                    const title =
+                        card.querySelector(".chapter-title").value;
+
+                    const paragraphs = [];
+
+                    card.querySelectorAll(".chapter-paragraph")
+                        .forEach(p => {
+
+                            paragraphs.push(p.value);
+
+                        });
+
+                    let bullets = [];
+
+                    const bulletArea =
+                        card.querySelector(".chapter-bullets");
+
+                    if (bulletArea) {
+
+                        bullets = bulletArea.value
+                            .split("\n")
+                            .map(x => x.trim())
+                            .filter(Boolean);
+
+                    }
+
+                    const img = card.querySelector(".chapter-image");
+
+                    blog.chapters.push({
+
+                        id: chapterId,
+
+                        title,
+
+                        paragraphs,
+
+                        bullet_points: bullets,
+
+                        image: {
+
+                            path: img.src,
+
+                            storage_path: img.dataset.storagePath,
+
+                            prompt: img.dataset.prompt,
+
+                            alt_text: img.alt,
+
+                            provider: "pollinations",
+
+                        }
+
+                    });
+
+                });
+
+            return blog;
+
+        }
+
+        /* ==========================================
+           Save
+        ========================================== */
+
+        async function saveBlog() {
+
+            try {
+
+                const response = await fetch(
+
+                    `/blogs/${BLOG_ID}/update/`,
+
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type": "application/json",
+
+                            "X-CSRFToken": getCSRFToken(),
+
+                        },
+
+                        credentials: "same-origin",
+
+                        body: JSON.stringify(
+
+                            collectBlogData()
+
+                        ),
+
+                    }
+
+                );
+
+                const result =
+
+                    await response.json();
+
+                if (!response.ok) {
+
+                    throw new Error(
+
+                        result.message ||
+
+                        "Save failed."
+
+                    );
+
+                }
+
+                showToast(
+
+                    "Blog saved successfully."
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                showToast(
+
+                    error.message,
+
+                    false
+
+                );
+
+            }
+
+        }
+
+        /* ==========================================
+           Save Buttons
+        ========================================== */
+
+        document
+
+            .getElementById("saveButton")
+
+            .addEventListener(
+
+                "click",
+
+                saveBlog
+
+            );
+
+        document
+
+            .getElementById("saveBottom")
+
+            .addEventListener(
+
+                "click",
+
+                saveBlog
+
+            );
+
+        /* ==========================================
+           Hero Image
+        ========================================== */
+        document
+            .querySelector(".regenerate-hero")
+            .addEventListener("click", function () {
+
+                const button = this;
+
+                setLoading(button, "Generating...");
+                currentLoadingButton = button;
+
+                const heroImage = document.querySelector(".hero-image");
+                currentImage = heroImage;
+
+                const paragraphs = [];
+
+                document
+                    .querySelectorAll(".chapter-paragraph")
+                    .forEach(p => paragraphs.push(p.value));
+
+                const preview =
+                    document.getElementById("previewImage");
+
+                preview.classList.add("hidden");
+
+                document
+                    .getElementById("imageLoading")
+                    .classList.remove("hidden");
+
+                // Open the modal immediately so the spinner is visible
+                document
+                    .getElementById("imageModal")
+                    .classList.remove("hidden");
+
+                fetch("/blogs/regenerate/image/", {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type": "application/json",
+
+                        "X-CSRFToken": getCSRFToken(),
+
+                    },
+
+                    body: JSON.stringify({
+
+                        paragraphs,
+
+                        generation_uuid: "{{ blog.generation_uuid }}",
+
+                        image_name: "hero",
+
+                    })
+
+                })
+
+                    .then(r => r.json())
+
+                    .then(data => {
+
+                        generatedImage = data.image;
+
+                        preview.onload = function () {
+
+                            document
+                                .getElementById("imageLoading")
+                                .classList.add("hidden");
+
+                            preview.classList.remove("hidden");
+
+                        };
+
+                        preview.src = data.image.path;
+
+                    })
+
+                    .catch(err => {
+
+                        console.error(err);
+
+                        document
+                            .getElementById("imageModal")
+                            .classList.add("hidden");
+
+                        stopLoading(currentLoadingButton);
+
+                        currentLoadingButton = null;
+
+                        showToast(
+                            "Failed to regenerate hero image.",
+                            false
+                        );
+
+                    });
+
+            });
+        /* ==========================================
+           Entire Blog
+        ========================================== */
+
+        /* ==========================================
+           Entire Blog
+        ========================================== */
+
+        const regenerateModal =
+            document.getElementById(
+                "regenerateBlogModal"
+            );
+
+        document
+            .getElementById("regenerateBlog")
+            .addEventListener("click", () => {
+
+                regenerateModal.classList.remove("hidden");
+
+            });
+
+        document
+            .getElementById("cancelRegenerateBlog")
+            .addEventListener("click", () => {
+
+                regenerateModal.classList.add("hidden");
+
+            });
+
+        document
+            .getElementById("confirmRegenerateBlog")
+            .addEventListener("click", async () => {
+
+                regenerateModal.classList.add("hidden");
+
+                const button =
+                    document.getElementById("regenerateBlog");
+
+                setLoading(
+                    button,
+                    "Regenerating..."
+                );
+
+                try {
+
+                    const response = await fetch(
+
+                        "/blogs/regenerate/blog/",
+
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type": "application/json",
+
+                                "X-CSRFToken": getCSRFToken(),
+
+                            },
+
+                            body: JSON.stringify({
+
+                                blog_id: BLOG_ID,
+
+                            }),
+
+                        }
+
+                    );
+
+                    const data =
+                        await response.json();
+
+                    if (!response.ok || !data.success) {
+
+                        throw new Error(
+
+                            data.message ||
+
+                            "Regeneration failed."
+
+                        );
+
+                    }
+
+                    showToast(
+                        "✅ Entire blog regenerated successfully."
+                    );
+
+                    setTimeout(() => {
+
+                        location.reload();
+
+                    }, 1200);
+
+                }
+
+                catch (error) {
+
+                    console.error(error);
+
+                    stopLoading(button);
+
+                    showToast(
+
+                        error.message,
+
+                        false
+
+                    );
+
+                }
+
+            });
+
+        /* ==========================================
+           Chapter Images
+        ========================================== */
+
+        document
+            .querySelectorAll(".regenerate-image")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const card = button.closest(".chapter-card");
+
+                    const img = card.querySelector(".chapter-image");
+
+                    currentImage = img;
+
+                    const paragraphs = [];
+
+                    card
+                        .querySelectorAll(".chapter-paragraph")
+                        .forEach(p => {
+
+                            paragraphs.push(p.value);
+
+                        });
+
+                    setLoading(button, "Generating...");
+                    currentLoadingButton = button;
+
+                    // Show spinner modal immediately
+                    const preview =
+                        document.getElementById("previewImage");
+
+                    preview.classList.add("hidden");
+
+                    document
+                        .getElementById("imageLoading")
+                        .classList.remove("hidden");
+
+                    document
+                        .getElementById("imageModal")
+                        .classList.remove("hidden");
+
+                    fetch("/blogs/regenerate/image/", {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type": "application/json",
+
+                            "X-CSRFToken": getCSRFToken(),
+
+                        },
+
+                        body: JSON.stringify({
+
+                            paragraphs,
+
+                            generation_uuid: "{{ blog.generation_uuid }}",
+
+                            image_name: "chapter_" + card.dataset.chapter,
+
+                        })
+
+                    })
+
+                        .then(r => r.json())
+
+                        .then(data => {
+
+                            generatedImage = data.image;
+
+                            preview.onload = function () {
+
+                                document
+                                    .getElementById("imageLoading")
+                                    .classList.add("hidden");
+
+                                preview.classList.remove("hidden");
+
+                            };
+
+                            preview.src = data.image.path;
+
+                        })
+
+                        .catch(err => {
+
+                            console.error(err);
+
+                            document
+                                .getElementById("imageModal")
+                                .classList.add("hidden");
+
+                            stopLoading(currentLoadingButton);
+
+                            currentLoadingButton = null;
+
+                            showToast(
+                                "Failed to regenerate image.",
+                                false
+                            );
+
+                        });
+
+                });
+
+            });
+        document.getElementById("acceptImage").onclick = function () {
+
+            console.log(currentImage);
+            console.log(generatedImage);
+
+            currentImage.src = generatedImage.path;
+
+            document.getElementById("imageModal").classList.add("hidden");
+            document
+                .getElementById("previewImage")
+                .classList.add("hidden");
+
+            document
+                .getElementById("imageLoading")
+                .classList.remove("hidden");
+            stopLoading(currentLoadingButton);
+
+            currentLoadingButton = null;
+        };
+        /* ==========================================
+           Paragraph
+        ========================================== */
+
+        document
+            .querySelectorAll(".regenerate-paragraph")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const textarea = button
+                        .closest(".paragraph-block")
+                        .querySelector(".chapter-paragraph");
+
+                    currentTextarea = textarea;
+
+                    setLoading(
+                        button,
+                        "Generating..."
+                    );
+                    currentLoadingButton = button;
+                    fetch("/blogs/regenerate/paragraph/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": getCSRFToken(),
+                        },
+                        body: JSON.stringify({
+                            paragraph: textarea.value,
+                            chapter_title: button
+                                .closest(".chapter-card")
+                                .querySelector(".chapter-title").value,
+                            tone: document.getElementById("tone").value,
+                            target_audience: document.getElementById("targetAudience").value,
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+
+                            if (!data.success) {
+                                throw new Error(data.message || "Failed to regenerate paragraph");
+                            }
+
+                            document.getElementById("newParagraph").value = data.paragraph;
+                            document.getElementById("paragraphModal").classList.remove("hidden");
+
+                        })
+                        .catch(error => {
+
+                            console.error(error);
+
+                            showToast("Failed to regenerate paragraph", false);
+
+                        })
+                    /*.finally(() => {
+            
+                        stopLoading(button);
+            
+                    });*/
+
+                });
+
+            });
+
+
+        document.getElementById("cancelParagraph").onclick = function () {
+
+            document
+                .getElementById("paragraphModal")
+                .classList.add("hidden");
+
+        };
+
+
+        document.getElementById("acceptParagraph").onclick = function () {
+
+            currentTextarea.value =
+                document.getElementById("newParagraph").value;
+
+            document
+                .getElementById("paragraphModal")
+                .classList.add("hidden");
+            stopLoading(currentLoadingButton);
+
+            currentLoadingButton = null;
+            showToast(
+                "Paragraph updated. Click Save Changes to save."
+            );
+
+        };
+        document
+            .getElementById("rejectImage")
+            .onclick = function () {
+
+                document
+                    .getElementById("imageModal")
+                    .classList.add("hidden");
+
+                document
+                    .getElementById("previewImage")
+                    .classList.add("hidden");
+
+                document
+                    .getElementById("imageLoading")
+                    .classList.remove("hidden");
+
+                stopLoading(currentLoadingButton);
+
+                currentLoadingButton = null;
+
+            };
+        /* ==========================================
+           Chapter
+        ========================================== */
+
+        let currentChapter = null;
+        let generatedChapter = null;
+
+        document.querySelectorAll(".regenerate-chapter")
+            .forEach(button => {
+
+                button.addEventListener("click", function () {
+
+                    const btn = this;
+
+
+                    const card = this.closest(".chapter-card");
+
+                    currentChapter = card;
+
+                    const paragraphs = [];
+
+                    card.querySelectorAll(".chapter-paragraph")
+                        .forEach(p => paragraphs.push(p.value));
+
+                    const bullets = card.querySelector(".chapter-bullets")
+                        .value
+                        .split("\n")
+                        .filter(Boolean);
+
+                    setLoading(
+                        this,
+                        "Generating..."
+                    );
+                    currentLoadingButton = this;
+                    fetch("/blogs/regenerate/chapter/", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": getCSRFToken(),
+                        },
+
+                        body: JSON.stringify({
+
+                            title: card.querySelector(".chapter-title").value,
+
+                            paragraphs,
+
+                            bullet_points: bullets,
+
+                            tone: document.getElementById("tone").value,
+
+                            target_audience: document.getElementById("targetAudience").value,
+
+                        })
+
+                    })
+
+                        .then(r => r.json())
+
+                        .then(data => {
+
+                            generatedChapter = data.chapter;
+
+                            document.getElementById("newChapterTitle").value = data.chapter.title;
+
+                            document.getElementById("newChapterParagraphs").value =
+                                data.chapter.paragraphs.join("\n\n");
+
+                            document.getElementById("newChapterBullets").value =
+                                data.chapter.bullet_points.join("\n");
+
+                            document.getElementById("chapterModal")
+                                .classList.remove("hidden");
+
+                        })
+                    /*
+                    .finally(()=>{
+                    
+                    stopLoading(btn);
+                    
+                    });*/
+
+                });
+
+            });
+        document.getElementById("acceptChapter").onclick = function () {
+
+            currentChapter.querySelector(".chapter-title").value =
+                generatedChapter.title;
+
+            const paras =
+                currentChapter.querySelectorAll(".chapter-paragraph");
+
+            generatedChapter.paragraphs.forEach((p, i) => {
+
+                if (paras[i])
+                    paras[i].value = p;
+
+            });
+
+            currentChapter.querySelector(".chapter-bullets").value =
+                generatedChapter.bullet_points.join("\n");
+
+            document
+                .getElementById("chapterModal")
+                .classList.add("hidden");
+
+            stopLoading(currentLoadingButton);
+
+            currentLoadingButton = null;
+
+            showToast(
+                "Chapter updated. Click Save Changes."
+            );
+
+        };
+
+        document.getElementById("cancelChapter").onclick = function () {
+
+            document
+                .getElementById("chapterModal")
+                .classList.add("hidden");
+
+            stopLoading(currentLoadingButton);
+
+            currentLoadingButton = null;
+
+        };
+        document.addEventListener(
+            "keydown",
+            function (e) {
+
+                if (
+                    (e.ctrlKey || e.metaKey) &&
+                    e.key.toLowerCase() === "s"
+                ) {
+
+                    e.preventDefault();
+
+                    saveBlog();
+
+                }
+
+            }
+        );
+    </script>
+
+    {% endblock %}

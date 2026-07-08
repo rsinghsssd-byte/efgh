@@ -1,0 +1,335 @@
+{% extends "authentication/base_auth.html" %}
+
+{% block title %}
+Login | AI Blog Generator
+{% endblock %}
+
+{% block auth_content %}
+
+<div>
+
+    <!-- Heading -->
+
+    <div class="text-center mb-8">
+
+        <h1 class="text-4xl font-bold text-slate-900">
+
+            Welcome Back 👋
+
+        </h1>
+
+        <p class="mt-3 text-slate-500">
+
+            Sign in to continue creating AI-powered blogs.
+
+        </p>
+
+    </div>
+
+    <!-- Error -->
+
+    <div
+        id="errorBox"
+        class="hidden mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+
+    </div>
+
+    <!-- Login Form -->
+
+    <form
+        id="loginForm"
+        class="space-y-6">
+
+        {% csrf_token %}
+
+        <!-- Email -->
+
+        <div>
+
+            <label class="block mb-2 font-medium">
+
+                Email
+
+            </label>
+
+            <input
+
+                id="email"
+
+                type="email"
+
+                required
+
+                placeholder="you@example.com"
+
+                class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+
+        </div>
+
+        <!-- Password -->
+
+        <div>
+
+            <div class="flex justify-between mb-2">
+
+                <label class="font-medium">
+
+                    Password
+
+                </label>
+
+                <a
+                    href="{% url 'forgot_password' %}"
+                    class="text-blue-600 hover:underline text-sm">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+            <div class="relative">
+
+                <input
+
+                    id="password"
+
+                    type="password"
+
+                    required
+
+                    placeholder="Password"
+
+                    class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+
+                <button
+
+                    type="button"
+
+                    id="togglePassword"
+
+                    class="absolute right-4 top-3 text-slate-500">
+
+                    <i data-lucide="eye"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Remember -->
+
+        <div class="flex items-center justify-between">
+
+            <label class="flex items-center gap-2">
+
+                <input
+                    type="checkbox">
+
+                <span class="text-sm">
+
+                    Remember Me
+
+                </span>
+
+            </label>
+
+        </div>
+
+        <!-- Login -->
+
+        <button
+
+            id="loginButton"
+
+            class="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white py-3 font-semibold transition">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <!-- Divider -->
+
+    <div class="my-8 flex items-center">
+
+        <div class="flex-1 border-t"></div>
+
+        <span class="mx-4 text-slate-400">
+
+            OR
+
+        </span>
+
+        <div class="flex-1 border-t"></div>
+
+    </div>
+
+    <!-- OAuth -->
+
+    <div class="space-y-3">
+
+        <button
+
+            id="googleButton"
+
+            class="w-full border rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-slate-50">
+
+            <img
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                class="w-5 h-5">
+
+            Continue with Google
+
+        </button>
+
+        <button
+
+            id="githubButton"
+
+            class="w-full border rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800">
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-5 h-5">
+                <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2.2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.07.78 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+            </svg>
+
+            <span>Continue with GitHub</span>
+
+        </button>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="mt-8 text-center">
+
+        Don't have an account?
+
+        <a
+            href="{% url 'signup' %}"
+            class="text-blue-600 font-semibold hover:underline">
+
+            Create Account
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+const form =
+document.getElementById("loginForm");
+
+const email =
+document.getElementById("email");
+
+const password =
+document.getElementById("password");
+
+const button =
+document.getElementById("loginButton");
+
+const errorBox =
+document.getElementById("errorBox");
+
+/* Password Toggle */
+
+document
+.getElementById("togglePassword")
+.onclick = () => {
+
+    if(password.type==="password"){
+
+        password.type="text";
+
+    }else{
+
+        password.type="password";
+
+    }
+
+};
+
+/* Login */
+
+form.addEventListener(
+
+"submit",
+
+async(e)=>{
+
+e.preventDefault();
+
+errorBox.classList.add("hidden");
+
+button.disabled=true;
+
+button.innerHTML="Signing In...";
+
+try{
+
+await Auth.login(
+
+email.value.trim(),
+
+password.value
+
+);
+
+window.location.href=
+
+window.DASHBOARD_URL;
+
+}
+
+catch(error){
+
+errorBox.innerText=
+
+error.message;
+
+errorBox.classList.remove("hidden");
+
+button.disabled=false;
+
+button.innerHTML="Login";
+
+}
+
+});
+
+/* Google */
+
+document
+.getElementById("googleButton")
+.onclick=()=>{
+
+Auth.loginWithGoogle();
+
+};
+
+/* GitHub */
+
+document
+.getElementById("githubButton")
+.onclick=()=>{
+
+Auth.loginWithGithub();
+
+};
+
+</script>
+
+{% endblock %}
